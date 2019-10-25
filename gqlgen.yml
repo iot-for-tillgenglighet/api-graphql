@@ -9,7 +9,15 @@ exec:
   filename: generated.go
 model:
   filename: models_gen.go
+autobind:
+- github.com/iot-for-tillgenglighet/api-graphql/pkg/graphql
+models:
+  Origin:
+    model: graphql.Origin
+  Telemetry:
+    model: graphql.Telemetry
+  Temperature:
+    model: graphql.Temperature
 resolver:
   filename: resolver.go
   type: Resolver
-autobind: []
