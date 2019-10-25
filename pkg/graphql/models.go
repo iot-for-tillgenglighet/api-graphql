@@ -6,12 +6,11 @@ type Origin struct {
 	Lat    float64
 }
 
-type Telemetry struct {
-	From Origin
-	When string
+type Telemetry interface {
 }
 
 type Temperature struct {
-	Telemetry
+	From Origin
+	When string
 	Temp float64
 }
