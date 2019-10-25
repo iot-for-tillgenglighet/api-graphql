@@ -1,28 +1,24 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
+# GraphQL schema
 
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+type Origin {
+  Device: String
+  Lon: Float
+  Lat: Float
 }
 
-type User {
-  id: ID!
-  name: String!
+scalar Timestamp
+
+interface Telemetry {
+  From: Origin!
+  When: Timestamp!
+}
+
+type Temperature implements Telemetry {
+  From: Origin!
+  When: Timestamp!
+  Temp: Float!
 }
 
 type Query {
-  todos: [Todo!]!
-}
-
-input NewTodo {
-  text: String!
-  userId: String!
-}
-
-type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  temperatures: [Temperature!]!
 }
