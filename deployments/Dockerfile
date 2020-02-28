@@ -1,26 +1,19 @@
-FROM golang AS builder
+FROM node:lts
 
-ENV GO111MODULE=on
+# Create app directory
+WORKDIR /usr/src/app
 
-# Set the Current Working Directory inside the container
-WORKDIR /app
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY ./package*.json ./
 
-COPY go.mod .
-COPY go.sum .
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
 
-RUN go mod download
-
+# Bundle app source
 COPY . .
 
-
-WORKDIR /app/cmd/api-graphql
-
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build
-
-FROM alpine
-
-RUN apk add ca-certificates
-
-COPY --from=builder /app/cmd/api-graphql/api-graphql /app/
-
-ENTRYPOINT ["/app/api-graphql"]
+EXPOSE 4000
+CMD [ "node", "src/gateway.js" ]
