@@ -11,9 +11,19 @@ services:
       - temperature
     environment:
       API_GQL_FEDERATION_PORT: '8989'
-      API_GQL_FEDERATION_SVCS: 'problemreport:8383,snowdepth:8282,temperature:8181'
+      API_GQL_FEDERATION_SVCS: 'deviceregistry:8484,problemreport:8383,snowdepth:8282,temperature:8181'
     ports:
       - '8989:8989'
+
+
+  deviceregistry:
+    image: "iot-for-tillgenglighet/iot-device-registry:latest"
+    restart: always
+    environment:
+      SERVICE_PORT: "8484"
+
+    ports:
+      - "8484"
 
 
   problemreport:
