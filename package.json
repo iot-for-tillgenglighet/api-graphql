@@ -23,7 +23,7 @@
   "homepage": "https://github.com/iot-for-tillgenglighet/api-graphql#readme",
   "dependencies": {
     "@apollo/gateway": "0.28.1",
-    "apollo-server": "2.24.0",
+    "apollo-server": "2.25.4",
     "axios": "0.21.1",
     "graphql": "15.5.0"
   }
